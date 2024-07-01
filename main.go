@@ -27,25 +27,15 @@ func executeTempate(w http.ResponseWriter, filepath string) {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	tplpath := filepath.Join("templates", "home.gohtml")
-	executeTempate(w, tplpath)
+	executeTempate(w, filepath.Join("templates", "home.gohtml"))
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	tplpath := filepath.Join("templates", "contact.gohtml")
-	executeTempate(w, tplpath)
+	executeTempate(w, filepath.Join("templates", "contact.gohtml"))
 }
 
 func faqHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprintf(w, `<h2>FAQ</h2><ol>
-			<li>Is there a free version?</li>
-				Yes, we offer trial for 7 days.
-			<li>What are your support hours?</li>
-				From 9 am to 6 pm.
-			<li>How can we get in touch with you?</li>
-				You can email us at <a href="mailto:bolatlobakbai@gmail.com">bolatlobakbai@gmail.com</a>
-		</ol>`)
+	executeTempate(w, filepath.Join("templates", "faq.gohtml"))
 }
 
 // func pathHandler(w http.ResponseWriter, r *http.Request) {

@@ -38,32 +38,6 @@ func faqHandler(w http.ResponseWriter, r *http.Request) {
 	executeTempate(w, filepath.Join("templates", "faq.gohtml"))
 }
 
-// func pathHandler(w http.ResponseWriter, r *http.Request) {
-// 	switch r.URL.Path {
-// 	case "/":
-// 		homeHandler(w, r)
-// 	case "/contact":
-// 		contactHandler(w, r)
-// 	default:
-// 		http.NotFound(w, r)
-// 	}
-// }
-
-// type Router struct{}
-
-// func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-// 	switch r.URL.Path {
-// 	case "/":
-// 		homeHandler(w, r)
-// 	case "/contact":
-// 		contactHandler(w, r)
-// 	case "/faq":
-// 		faqHandler(w, r)
-// 	default:
-// 		http.NotFound(w, r)
-// 	}
-// }
-
 func main() {
 	r := chi.NewRouter()
 	r.Get("/", homeHandler)

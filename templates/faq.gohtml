@@ -1,9 +1,10 @@
 <h1>FAQ</h1>
 <ol>
-    <li>Is there a free version?</li>
-        Yes, we offer trial for 7 days.
-    <li>What are your support hours?</li>
-        From 9 am to 6 pm.
-    <li>How can we get in touch with you?</li>
-        You can email us at <a href="mailto:bolatlobakbai@gmail.com">bolatlobakbai@gmail.com</a>
+    {{range .}} 
+        {{template "qa" .}}
+    {{end}}
 </ol>
+
+{{define "qa"}}
+    <li><b>{{.Question}}</b><br>{{.Answer}}</li>
+{{end}}

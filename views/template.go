@@ -19,8 +19,8 @@ type Template struct {
 	htmlTpl *template.Template
 }
 
-func ParseFs(fs fs.FS, pattern string) (Template, error) {
-	tpl, err := template.ParseFS(fs, pattern)
+func ParseFs(fs fs.FS, patterns ...string) (Template, error) {
+	tpl, err := template.ParseFS(fs, patterns...)
 	if err != nil {
 		return Template{}, fmt.Errorf("error parsing the template %w", err)
 	}

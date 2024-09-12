@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/boaltl/lenslocked/controllers"
+	"github.com/boaltl/lenslocked/models"
 	"github.com/boaltl/lenslocked/templates"
 	"github.com/boaltl/lenslocked/views"
 	"github.com/go-chi/chi/v5"
@@ -22,7 +23,19 @@ func main() {
 	tpl = views.Must(views.ParseFs(templates.FS, "faq.gohtml", "tailwind-css.gohtml"))
 	r.Get("/faq", controllers.FAQ(tpl))
 
-	userC := controllers.Users{}
+	cfg := models.DefaultPostgresConfig()
+	db, err := models.Open(cfg)
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	userService := models.UserService{
+		DB: db,
+	}
+
+	userC := controllers.Users{
+		UserService: &userService,
+	}
 	userC.Templates.New = views.Must(views.ParseFs(templates.FS, "signup.gohtml", "tailwind-css.gohtml"))
 	r.Get("/signup", userC.New)
 	r.Post("/users", userC.Create)

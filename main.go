@@ -37,7 +37,9 @@ func main() {
 		UserService: &userService,
 	}
 	userC.Templates.New = views.Must(views.ParseFs(templates.FS, "signup.gohtml", "tailwind-css.gohtml"))
+	userC.Templates.SignIn = views.Must(views.ParseFs(templates.FS, "signin.gohtml", "tailwind-css.gohtml"))
 	r.Get("/signup", userC.New)
+	r.Get("/signin", userC.SignIn)
 	r.Post("/users", userC.Create)
 
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {

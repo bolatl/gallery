@@ -42,6 +42,8 @@ func main() {
 	r.Get("/signin", userC.SignIn)
 	r.Post("/users", userC.Create)
 	r.Post("/signin", userC.ProcessSignIn)
+	r.Get("/users/me", userC.User)
+
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 	})

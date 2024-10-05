@@ -9,6 +9,7 @@ import (
 	"github.com/boaltl/lenslocked/templates"
 	"github.com/boaltl/lenslocked/views"
 	"github.com/go-chi/chi/v5"
+	"github.com/gorilla/csrf"
 )
 
 func main() {
@@ -48,5 +49,13 @@ func main() {
 		http.NotFound(w, r)
 	})
 	fmt.Println("Starting now")
-	http.ListenAndServe(":3000", r)
+	// byte slice key for our middleware
+	csrfKey := "0123456789aAbBcCdDeEfFgGhHiIjJkK"
+	// function that just wraps our router securing CSRF
+	csrfMw := csrf.Protect(
+		[]byte(csrfKey),
+		// TODO: fix this before deploy
+		csrf.Secure(false),
+	)
+	http.ListenAndServe(":3000", csrfMw(r))
 }

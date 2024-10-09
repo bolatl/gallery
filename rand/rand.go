@@ -6,9 +6,6 @@ import (
 	"fmt"
 )
 
-// len of our session tokens
-const SessionTokenBytes = 32
-
 func Bytes(n int) ([]byte, error) {
 	b := make([]byte, n)
 	// rand.Read calls Reader.Read using io.ReadFull and creates random bytes slice
@@ -29,8 +26,4 @@ func String(n int) (string, error) {
 		return "", fmt.Errorf("rand/String: %w", err)
 	}
 	return base64.URLEncoding.EncodeToString(b), nil
-}
-
-func SessionToken() (string, error) {
-	return String(SessionTokenBytes)
 }

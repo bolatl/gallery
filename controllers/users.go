@@ -59,7 +59,8 @@ func (u Users) SignIn(w http.ResponseWriter, r *http.Request) {
 
 func (u Users) ProcessSignIn(w http.ResponseWriter, r *http.Request) {
 	var data struct {
-		Email, Password string
+		Email    string
+		Password string
 	}
 	data.Email, data.Password = r.FormValue("email"), r.FormValue("password")
 	user, err := u.UserService.Authenticate(data.Email, data.Password)

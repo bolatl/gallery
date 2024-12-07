@@ -31,3 +31,10 @@ func readCookie(r *http.Request, name string) (string, error) {
 	}
 	return c.Value, nil
 }
+
+func deleteCookie(w http.ResponseWriter, name string) {
+	cookie := newCookie(name, "")
+	// when this field is less than 0, cookie gets deleted
+	cookie.MaxAge = -1
+	http.SetCookie(w, cookie)
+}

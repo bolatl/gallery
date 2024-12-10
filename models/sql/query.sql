@@ -1,0 +1,1 @@
+SELECT * FROM users JOIN sessions ON users.id = sessions.user_id;
